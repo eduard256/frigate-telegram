@@ -14,7 +14,7 @@ from typing import List, Optional
 
 import aiohttp
 
-from config import Config, THUMBNAIL_ONLY_CAMERAS
+from config import Config
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +72,7 @@ class VideoProcessor:
 
         try:
             # Check if this camera needs thumbnail-only processing
-            if camera in THUMBNAIL_ONLY_CAMERAS:
+            if camera in self.config.thumbnail_only_cameras:
                 return await self._process_thumbnail(
                     event_id, camera, label, duration_int, temp_dir
                 )

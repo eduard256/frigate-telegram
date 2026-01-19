@@ -9,7 +9,7 @@ from typing import Optional
 
 import aiohttp
 
-from config import Config, CAMERA_THREAD_MAP, LABEL_TRANSLATIONS
+from config import Config, LABEL_TRANSLATIONS
 from video_processor import ProcessedEvent, VideoChunk
 
 logger = logging.getLogger(__name__)
@@ -32,7 +32,7 @@ class TelegramSender:
         Returns:
             True if all chunks were sent successfully
         """
-        thread_id = CAMERA_THREAD_MAP.get(event.camera)
+        thread_id = self.config.camera_thread_map.get(event.camera)
         if thread_id is None:
             logger.warning(f"No thread mapping for camera {event.camera}, skipping")
             return False

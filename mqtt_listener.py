@@ -11,7 +11,7 @@ from typing import Optional
 
 import aiomqtt
 
-from config import Config, ALLOWED_LABELS, CAMERA_THREAD_MAP
+from config import Config, ALLOWED_LABELS
 
 logger = logging.getLogger(__name__)
 
@@ -117,7 +117,7 @@ class MQTTListener:
             return
 
         # Filter: only cameras we have thread mappings for
-        if camera not in CAMERA_THREAD_MAP:
+        if camera not in self.config.camera_thread_map:
             logger.debug(f"Skipping unmapped camera: {camera}")
             return
 
